@@ -1,0 +1,491 @@
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="google-site-verification" content="ACHjTKbjcCIhWi7Rs5QOxBBwLwFb3ijJXm5zC2avSZw" />
+
+<title> UNICALRESULTDATABASEtitle>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title> unicalresultdatabase Personal Demo</title>
+<style>
+:root{--p:#7042b8;--pale:#f0e8ff;--ink:#29243a;--muted:#746d83;--line:#e8e2f0;--green:#dff5e8}
+*{box-sizing:border-box}body{margin:0;font:15px Arial,sans-serif;color:var(--ink);background:#f7f6fb}button,input,select{font:inherit}button{cursor:pointer}
+#loginPage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#482477,#8a5fc9,#c2a5f2)}
+.login{background:white;border-radius:20px;padding:26px;width:min(100%,420px);box-shadow:0 18px 45px #24103c55}.brand{color:var(--p);font-weight:bold;letter-spacing:1px;font-size:12px;text-transform:uppercase}
+h1{font-size:24px;margin:12px 0 8px}.muted{color:var(--muted);font-size:13px;line-height:1.5}.types{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:20px 0}
+.type{padding:13px 6px;border:1px solid #ddd2ef;background:#fff;border-radius:10px;color:#5c4a76;font-weight:bold}.type.selected{border:2px solid var(--p);background:var(--pale);color:var(--p)}
+label{display:block;font-size:12px;font-weight:bold;margin:13px 0 6px}input,select{width:100%;padding:13px;border:1px solid #ddd6e8;border-radius:9px;background:white}
+.primary{width:100%;border:0;border-radius:10px;background:linear-gradient(90deg,#6335a6,#9064d1);color:white;padding:14px;font-weight:bold;margin-top:18px}.error{color:#b42318;font-size:13px;min-height:18px;margin-top:10px}.note{font-size:11px;color:#82798f;line-height:1.5}
+#app{display:none;min-height:100vh}.top{display:flex;align-items:center;gap:12px;background:#fff;border-bottom:1px solid var(--line);padding:14px 16px;position:sticky;top:0;z-index:3}
+.hamb{border:0;border-radius:9px;background:#dcf5e9;color:#26704f;width:42px;height:42px;font-size:22px}.title{flex:1;color:var(--p);font-size:13px;font-weight:bold}.logout{border:1px solid #ddd2ef;background:white;color:var(--p);padding:10px;border-radius:8px;font-size:12px;font-weight:bold}
+.layout{display:flex;max-width:1100px;margin:auto}.side{display:none;width:230px;flex-shrink:0;padding:18px}.side.open{display:block}.nav{display:block;width:100%;text-align:left;padding:13px;border:0;border-radius:9px;background:transparent;color:#594a70;font-weight:bold;margin-bottom:5px}.nav.active,.nav:hover{background:var(--pale);color:var(--p)}
+main{padding:20px;width:100%;min-width:0}.page{display:none}.page.active{display:block}.heading{color:var(--p);font-size:21px;margin:4px 0 18px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}.card{background:white;border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}.card h3{font-size:13px;letter-spacing:.4px;color:var(--p);margin:0 0 12px;text-transform:uppercase}
+.rowinfo{display:grid;grid-template-columns:82px minmax(0,1fr) auto;gap:7px;align-items:center;padding:10px 0;border-bottom:1px solid #f0edf4;font-size:12px}.rowinfo:last-child{border:0}.key{color:#756e81}.val{font-weight:bold;overflow-wrap:anywhere}.edit{border:0;background:var(--pale);color:var(--p);border-radius:5px;padding:6px;font-size:10px}
+.result-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0 16px}.summary-box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}.summary-label{font-size:11px;color:var(--muted);font-weight:bold;letter-spacing:.5px}.summary-value{font-size:24px;font-weight:bold;color:var(--p);margin-top:7px}.semester-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}.semester-grid .card{min-width:0;padding:12px}.semester-grid .card h3{font-size:12px}.semester-grid .tablewrap{width:100%;overflow-x:auto}.semester-grid table{width:100%;min-width:470px;font-size:11px}.semester-grid th,.semester-grid td{padding:9px 7px}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:510px;font-size:12px}th{background:var(--pale);color:#5d3994;text-align:left;padding:11px 9px}td{padding:11px 9px;border-bottom:1px solid #eeeaf4}.pill{display:inline-block;background:var(--green);color:#237344;padding:4px 8px;border-radius:20px;font-size:10px;font-weight:bold}.grade{display:inline-block;padding:4px 7px;border-radius:6px;background:#eee;color:#555;font-weight:bold}.A{background:#d8f5df;color:#176b34}.B{background:#d7f1ed;color:#116b66}.F{background:#ffe0e0;color:#a11d2c}.NR{background:#eee;color:#777}.smallbtn{border:1px solid #ddd2ef;background:white;color:var(--p);padding:10px 12px;border-radius:8px;font-size:12px;font-weight:bold;margin:0 6px 12px 0}.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:14px}.legend div{background:white;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12px;line-height:1.8}
+@media(min-width:760px){.side.open{display:block}}@media(max-width:600px){.semester-grid{gap:8px}.semester-grid .card{padding:9px}.semester-grid .tablewrap{overflow-x:auto}.summary-box{padding:11px}.summary-value{font-size:21px}}@media(max-width:420px){.login{padding:21px}.rowinfo{grid-template-columns:72px minmax(0,1fr) auto}.title{font-size:11px}}
+
+/* Dashboard reference layout */
+body{background:#f1f2f7;color:#303440;font-family:Arial,sans-serif}
+.top{background:linear-gradient(110deg,#37106b 0%,#8000a7 58%,#12b79c 100%);color:#fff;border-bottom:0;padding:13px 20px}
+.title{color:#fff;letter-spacing:1.1px;font-size:12px}
+.hamb{background:#ffffff20;color:#fff;border:1px solid #ffffff55}
+.logout{background:#fff;color:#6c2498}
+.layout{display:block;max-width:1200px;margin:0 auto;position:relative}
+.side{display:none;position:absolute;top:0;left:12px;width:min(280px,85vw);padding:12px;background:#fff;border:1px solid #e5e2ed;border-radius:0 0 12px 12px;box-shadow:0 12px 28px #20123a30;z-index:5}
+.side.open{display:block}
+main{padding:16px;width:100%;min-width:0}
+.heading{background:linear-gradient(110deg,#37106b,#8000a7,#12b79c);color:#fff;font-size:15px;letter-spacing:1px;text-transform:uppercase;padding:16px 18px;margin:-16px -16px 16px}
+.breadcrumb{display:block;font-size:10px;font-weight:normal;letter-spacing:0;text-transform:none;margin-top:5px;color:#ffffffb8}
+.selection-card{padding:20px 18px 18px}
+.selection-card h3{display:flex;align-items:center;gap:10px;color:#555b69;margin:0 0 18px;font-size:12px;letter-spacing:.7px}
+.select-icon{display:inline-flex;width:24px;height:24px;align-items:center;justify-content:center;background:#f0e5fa;color:#7026a0;border-radius:5px}
+.selection-note{background:#e3f5ee;border:1px solid #d2ebdf;color:#53756a;border-radius:6px;padding:10px 12px;font-size:11px;margin-bottom:20px}
+.selection-note span{color:#159e86;margin-right:7px}
+.selection-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.selection-fields label{font-size:10px;color:#697080;letter-spacing:.25px;margin:0 0 7px}
+.selection-fields select{height:42px;padding:10px;font-size:12px;color:#555b69;background:#f8f8fa;border-color:#e3e3e9}
+.selection-button{width:auto;min-width:138px;margin-top:28px;padding:13px 22px;font-size:11px;letter-spacing:1px}
+@media(max-width:520px){main{padding:16px}.selection-card{padding:16px 13px}.selection-fields{grid-template-columns:1fr;gap:13px}.selection-button{width:100%;margin-top:20px}.selection-fields select{height:44px}}
+
+.dash-grid{display:grid;grid-template-columns:minmax(210px,1fr) minmax(0,2fr);gap:14px;margin-bottom:14px}
+.profile-card,.dash-card{background:#fff;border:1px solid #e7e6ed;border-radius:13px;overflow:hidden;min-width:0}
+.profile-card{padding:18px 14px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.avatar{width:78px;height:78px;border-radius:50%;border:2px solid #d9b4ee;background:#f0e5fa;display:flex;align-items:center;justify-content:center;color:#6c2498;font-weight:bold;font-size:23px;overflow:hidden;margin:0 auto 9px}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.profile-name{font-size:12px;letter-spacing:.8px;font-weight:bold;text-transform:uppercase;margin:2px 0 5px}
+.level-tag{background:#7026a0;color:#fff;border-radius:12px;padding:4px 10px;font-size:9px;letter-spacing:.5px;margin-bottom:10px}
+.profile-line{display:flex;justify-content:space-between;gap:8px;width:100%;padding:10px 0;border-top:1px solid #eeeef2;font-size:11px;text-align:left}
+.profile-line span:first-child,.info-label{color:#8b8d98;font-size:10px;text-transform:uppercase;letter-spacing:.3px}
+.profile-line strong{text-align:right;overflow-wrap:anywhere;font-size:11px}
+.change-photo{margin-top:12px;background:#fff;border:1px solid #8d3bb0;color:#7026a0;border-radius:5px;padding:7px 10px;font-size:10px;font-weight:bold}
+.dash-card h3{font-size:11px;letter-spacing:1px;color:#626878;margin:0;padding:16px;border-bottom:1px solid #ececf1;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.card-icon{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;border-radius:5px;background:#f1e5fa;color:#7026a0}
+.info-list{padding:8px 14px 12px}
+.info-row{display:grid;grid-template-columns:minmax(85px,1fr) minmax(0,2fr) auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f3;font-size:11px;min-width:0}
+.info-row:last-child{border-bottom:0}.info-value{text-align:right;overflow-wrap:anywhere;font-size:11px;font-weight:500;min-width:0}
+.edit{border:1px solid #a35bb7;background:#fff;color:#7026a0;border-radius:5px;padding:4px 7px;font-size:10px;white-space:nowrap}
+.dash-card.full{margin-bottom:14px}
+.dash-card .tablewrap{padding:0 0 2px}
+.dash-card table{min-width:0;font-size:11px}
+.dash-card th{background:#f7f7fa;color:#777d89;font-size:9px;text-transform:uppercase;letter-spacing:.4px;padding:10px 12px}
+.dash-card td{padding:11px 12px;border-bottom:1px solid #eeeef2}
+.pill{background:#dff7f0;color:#21a28b;border-radius:4px;padding:4px 8px}
+@media(max-width:650px){.dash-grid{grid-template-columns:minmax(0,1fr)}.profile-card{padding:16px}.heading{margin-top:-16px}.info-row{grid-template-columns:minmax(78px,.9fr) minmax(0,1.5fr) auto}.info-value{font-size:10px}.dash-card table{font-size:10px}.dash-card th,.dash-card td{padding:9px 7px}}
+
+
+
+/* Results sheet layout based on the user's reference */
+.result-actions{display:flex;justify-content:flex-end;gap:8px;margin:0 0 10px}
+.result-sheet{background:#fff;border:1px solid #e4e5eb;border-radius:8px;overflow:hidden;box-shadow:0 5px 18px #25204a0b}
+.result-strip{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px;background:linear-gradient(110deg,#35105e 0%,#7a009b 58%,#1cae9b 100%);color:#fff}
+.result-brand{display:flex;align-items:center;gap:14px;min-width:0}
+.result-seal{width:54px;height:54px;flex:0 0 54px;border:2px solid #d8c9ef;border-radius:50%;display:grid;place-items:center;background:#fff;color:#4e247e;font-size:25px}
+.result-university{font-size:13px;font-weight:800;letter-spacing:1.4px}
+.result-subtitle{font-size:9px;letter-spacing:1px;margin-top:5px;opacity:.8}
+.result-meta{text-align:right;font-size:10px;line-height:1.9;white-space:normal}
+.result-namebar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 20px;padding:11px 14px;border:1px solid #e8eaf0;border-radius:7px;background:#f7f8fa}
+.result-student-name{font-size:12px;font-weight:800;letter-spacing:1px}
+.result-student-meta{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end;font-size:10px;color:#646b76}.result-student-info{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:6px 18px;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid #e8eaf0;
+  font-size:10px;
+  color:#555d68;
+}
+
+.result-student-info b{
+  color:#4b3b8f;
+  font-weight:800;
+}
+.result-semesters{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:0 20px}
+.result-semester{min-width:0}
+.semester-label{display:inline-block;padding:5px 12px;margin-bottom:7px;border-radius:5px;background:linear-gradient(90deg,#53138c,#20a88f);color:white;font-size:9px;font-weight:bold;letter-spacing:.8px}
+.result-semester .tablewrap{width:100%;overflow:visible;border-bottom:2px solid #c9cbd2}
+.result-semester table{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse;font-size:clamp(6px,1.25vw,10px)}
+.result-semester th{background:#f0f1f4;color:#69717c;font-size:clamp(5.5px,1.1vw,9px);letter-spacing:0;padding:6px 2px;white-space:normal;overflow-wrap:anywhere}
+.result-semester td{padding:6px 2px;border-bottom:1px solid #eceef2;white-space:normal;overflow-wrap:anywhere}
+.result-semester th:nth-child(1),.result-semester td:nth-child(1){width:22%;text-align:left}
+.result-semester th:nth-child(2),.result-semester td:nth-child(2){width:12%;text-align:center}
+.result-semester th:nth-child(3),.result-semester td:nth-child(3){width:9%;text-align:center}
+.result-semester th:nth-child(4),.result-semester td:nth-child(4){width:9%;text-align:center}
+.result-semester th:nth-child(5),.result-semester td:nth-child(5){width:10%;text-align:center}
+.result-semester th:nth-child(6),.result-semester td:nth-child(6){width:12%;text-align:center}
+.result-semester th:nth-child(7),.result-semester td:nth-child(7){width:16%;text-align:center}
+.result-semester th:nth-child(8),.result-semester td:nth-child(8){width:10%;text-align:center}
+.result-semester .grade{padding:3px 2px;min-width:0}
+.result-semester td:nth-child(3),.result-semester td:nth-child(4),.result-semester td:nth-child(5),.result-semester td:nth-child(6),.result-semester td:nth-child(8){text-align:center}
+.result-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 20px}
+.result-summary .summary-box{min-height:60px;background:linear-gradient(120deg,#39106a,#76009b);color:#fff;text-align:center;border-radius:9px;border:1px solid #e8e2f0;padding:12px}
+.result-summary .summary-box:nth-child(2){background:linear-gradient(120deg,#55178d,#19a991)}
+.result-summary .summary-box:last-child{background:#f7f8fa;color:#38404b;text-align:left}
+.result-summary .summary-label{color:inherit;font-size:9px;letter-spacing:1px;text-transform:uppercase}
+.result-summary .summary-value{color:inherit;font-size:24px;margin-top:4px}
+.result-summary .summary-box:last-child .summary-value{font-size:13px;text-transform:uppercase}
+.grade-key{padding:0 20px 20px}
+.grade-key-title{font-size:10px;font-weight:bold;letter-spacing:1px;color:#747b85;border-bottom:1px solid #e7e9ee;padding:0 0 9px;margin-bottom:10px}
+.grade-key-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px 18px;font-size:10px;line-height:1.55;color:#626a75}
+.grade-key-grid b{color:#3d4652}
+@media(max-width:600px){
+ .result-strip{padding:14px;gap:10px}.result-seal{width:42px;height:42px;flex-basis:42px;font-size:20px}
+ .result-university{font-size:10px;letter-spacing:.8px}.result-subtitle{font-size:7px}
+ .result-meta{font-size:8px}.result-namebar{margin:10px;padding:9px;align-items:flex-start;flex-direction:column}
+ .result-student-meta{justify-content:flex-start;gap:8px}.result-semesters{gap:8px;padding:0 10px}
+ .result-semester .tablewrap{overflow:visible}.result-summary{margin:12px 10px;gap:7px}
+ .result-summary .summary-box{padding:9px 5px}.result-summary .summary-value{font-size:20px}
+ .grade-key{padding:0 10px 14px}.grade-key-grid{gap:6px 10px;font-size:9px}
+}
+@media print{.result-actions,.top,.side{display:none!important}#results{display:block!important}.result-sheet{box-shadow:none}.result-semesters{grid-template-columns:1fr 1fr}}
+
+</style></head><body>
+
+<section id="loginPage"><div class="login">
+<div class="brand"><img src="unical-logo.jpg" alt="UNICAL Logo" style="width:70px;height:70px;object-fit:contain;display:block;margin:0 auto 8px;">University of Calabar</div>
+<h1>UNICAL Result Database</h1><p class="muted">Sign in to view your dashboard.</p>
+<div class="types"><button class="type" id="newOption" type="button" onclick="chooseType('new')">New Student</button><button class="type" id="returnOption" type="button" onclick="chooseType('returning')">Returning Student</button></div>
+<label for="matric">Matric Number</label><input id="matric" placeholder="Enter matric number">
+<label for="jamb">JAMB Registration Number</label><input id="jamb" placeholder="Enter JAMB registration number">
+<label for="pin">PIN</label><input id="pin" type="password" inputmode="numeric" placeholder="Enter PIN">
+<button class="primary" type="button" onclick="login()">LOGIN</button><div class="error" id="error" role="status"></div>
+</p>
+</div></section>
+<div id="app"><header class="top"><button class="hamb" onclick="toggleMenu()" aria-label="Toggle menu">☰</button><div class="title">UNICAL RESULT DATABASE</div><button class="logout" onclick="logout()">LOG OUT</button></header>
+<div class="layout"><aside class="side" id="sidebar"><button class="nav active" onclick="showPage('dashboard',this)">Dashboard</button><button class="nav" onclick="showPage('selection',this)">Check Result</button><button class="nav" onclick="showPage('history',this)">Course Registration History</button></aside>
+<main>
+<section class="page active" id="dashboard">
+
+<div class="brand">
+  <img src="unical-logo.jpg" alt="UNICAL Logo" style="width:70px;height:70px;object-fit:contain;display:block;margin:0 auto 8px;">
+  University of Calabar
+</div>
+
+<h2 class="heading">◉ &nbsp; DASHBOARD</h2>
+<div class="dash-grid">
+<article class="profile-card">
+<div class="avatar" id="avatar"><span>BC</span></div>
+<div class="profile-name">BAYIM CONFIDENCE KEJIE</div><div class="level-tag">UNDERGRADUATE</div>
+<div class="profile-line"><span>MATRIC NO.</span><strong>22/021145071</strong></div>
+<div class="profile-line"><span>ENTRY YEAR</span><strong>2022</strong></div>
+<button class="change-photo" type="button" onclick="document.getElementById('photoInput').click()">▣ &nbsp; Change Photo</button>
+<input id="photoInput" type="file" accept="image/*" hidden onchange="changePhoto(event)">
+</article>
+<article class="dash-card"><h3><span class="card-icon">▦</span> ACADEMIC INFORMATION</h3><div class="info-list">
+<div class="info-row"><span class="info-label">Programme</span><span class="info-value">UNDERGRADUATE</span></div>
+<div class="info-row"><span class="info-label">Faculty</span><span class="info-value">MEDICAL LABORATORY SCIENCE</span></div>
+<div class="info-row"><span class="info-label">Department</span><span class="info-value">MEDICAL LABORATORY SCIENCE (NEW)</span></div>
+<div class="info-row"><span class="info-label">Field of Study</span><span class="info-value">MEDICAL LABORATORY SCIENCE</span></div>
+<div class="info-row"><span class="info-label">JAMB No.</span><span class="info-value">202210487715JF</span><button class="edit" onclick="editField('JAMB Number','202210487715JF')">Edit</button></div>
+</div></article></div>
+<article class="dash-card full"><h3><span class="card-icon" style="background:#e3f8f1;color:#159e86">♟</span> PERSONAL INFORMATION</h3><div class="info-list">
+<div class="info-row"><span class="info-label">Phone</span><span class="info-value">08069954531</span><button class="edit" onclick="editField('Phone','08069954531')">Edit</button></div>
+<div class="info-row"><span class="info-label">Email</span><span class="info-value">bayimconfidence9@gmail.com</span><button class="edit" onclick="editField('Email','bayimconfidence9@gmail.com')">Edit</button></div>
+<div class="info-row"><span class="info-label">Date of Birth</span><span class="info-value">—</span><button class="edit" onclick="editField('Date of Birth','—')">Edit</button></div>
+<div class="info-row"><span class="info-label">Marital Status</span><span class="info-value">Single</span><button class="edit" onclick="editField('Marital Status','Single')">Edit</button></div>
+<div class="info-row"><span class="info-label">Gender</span><span class="info-value">FEMALE</span><button class="edit" onclick="editField('Gender','FEMALE')">Edit</button></div>
+<div class="info-row"><span class="info-label">State of Origin</span><span class="info-value">Cross River</span><button class="edit" onclick="editField('State of Origin','Cross River')">Edit</button></div>
+<div class="info-row"><span class="info-label">NIN</span><span class="info-value">—</span><button class="edit" onclick="editField('NIN','—')">Edit</button></div>
+</div></article>
+<article class="dash-card full"><h3 style="background:linear-gradient(100deg,#37106b,#8000a7);color:#fff"><span class="card-icon">▤</span> COURSE REGISTRATION HISTORY</h3><div class="tablewrap"><table><thead><tr><th>#</th><th>Session</th><th>Level</th><th>Semester</th><th>Status</th></tr></thead><tbody>
+<tr><td>1</td><td>2022</td><td>1</td><td>First</td><td><span class="pill">NORMAL</span></td></tr><tr><td>2</td><td>2022</td><td>1</td><td>Second</td><td><span class="pill">NORMAL</span></td></tr><tr><td>3</td><td>2023</td><td>2</td><td>First</td><td><span class="pill">NORMAL</span></td></tr><tr><td>4</td><td>2023</td><td>2</td><td>Second</td><td><span class="pill">NORMAL</span></td></tr><tr><td>5</td><td>2025</td><td>3</td><td>First</td><td><span class="pill">NORMAL</span></td></tr><tr><td>6</td><td>2025</td><td>3</td><td>Second</td><td><span class="pill">NORMAL</span></td></tr>
+</tbody></table></div></article>
+</section>
+<section class="page" id="selection">
+<h2 class="heading">▤ &nbsp; CHECK RESULT <small class="breadcrumb">Dashboard &nbsp;/&nbsp; Check Result</small></h2>
+<article class="card selection-card">
+<h3><span class="select-icon">▣</span> SELECT RESULT PARAMETERS</h3>
+<div class="selection-note"><span>●</span> Your result will open here. Select your session, level, and season below.</div>
+<div class="selection-fields">
+<div><label for="session">▦ ACADEMIC SESSION</label><select id="session"><option value="">— Select Session —</option><option>2022/2023</option><option>2023/2024</option><option>2025/2026</option></select></div>
+<div><label for="level">▤ LEVEL</label><select id="level"><option value="">— Select Level —</option><option>100 Level</option><option>200 Level</option><option>300 Level</option></select></div>
+<div><label for="season">★ SEASON</label><select id="season"><option value="">— Select Season —</option><option>NORMAL</option><option>RESIT</option><option>VACATION</option></select></div>
+</div>
+<button class="primary selection-button" onclick="showResults()">↗ &nbsp; VIEW RESULT</button>
+</article></section>
+<section class="page" id="results">
+
+<div class="brand">
+  <img src="unical-logo.jpg" alt="UNICAL Logo" style="width:70px;height:70px;object-fit:contain;display:block;margin:0 auto 8px;">
+  University of Calabar
+</div>
+
+<div class="result-actions">
+  <button class="smallbtn" onclick="showPage('selection')">← Back</button>
+  <button class="smallbtn" onclick="window.print()">▣ Print Result</button>
+</div>
+
+<div id="resultTable"></div>
+
+</section>
+<section class="page" id="history"><h2 class="heading">Course Registration History</h2><article class="card"><div class="tablewrap"><table><thead><function showResults><th>#</th><th>Session</th><th>Level</th><th>Semester</th><th>Status</th></tr></thead><tbody>
+<tr><td>1</td><td>2022</td><td>1</td><td>First</td><td><span class="pill">NORMAL</span></td></tr><tr><td>2</td><td>2022</td><td>1</td><td>Second</td><td><span class="pill">NORMAL</span></td></tr><tr><td>3</td><td>2023</td><td>2</td><td>First</td><td><span class="pill">NORMAL</span></td></tr><tr><td>4</td><td>2023</td><td>2</td><td>Second</td><td><span class="pill">NORMAL</span></td></tr><tr><td>5</td><td>2025</td><td>3</td><td>First</td><td><span class="pill">NORMAL</span></td></tr><tr><td>6</td><td>2025</td><td>3</td><td>Second</td><td><span class="pill">NORMAL</span></td></tr>
+</tbody></table></div></article></section>
+</main></div></div>
+<script>
+/* Front-end demonstration only; this is not secure authentication. */
+const DEMO_MATRIC="22/021145071",DEMO_JAMB="202210487715JF",DEMO_PIN="800061";
+let studentType="";
+
+function chooseType(t){
+  studentType=t;
+  document.getElementById("newOption").classList.toggle("selected",t==="new");
+  document.getElementById("returnOption").classList.toggle("selected",t==="returning");
+  document.getElementById("error").textContent="";
+}function login(){
+  let m=document.getElementById("matric").value.trim();
+  let j=document.getElementById("jamb").value.trim();
+  let p=document.getElementById("pin").value.trim();
+  let e=document.getElementById("error");
+
+  if(!studentType){
+    e.textContent="Please choose New Student or Returning Student.";
+    return;
+  }
+
+  if(m===DEMO_MATRIC && j===DEMO_JAMB && p===DEMO_PIN){
+    e.textContent="";
+
+    const btn=document.querySelector("#loginPage .primary");
+    btn.textContent="LOGGING IN...";
+    btn.disabled=true;
+
+    setTimeout(()=>{
+      document.getElementById("loginPage").style.display="none";
+      document.getElementById("app").style.display="block";
+      btn.textContent="LOGIN";
+      btn.disabled=false;
+      showPage("dashboard");
+    },1200);
+
+  }else{
+    e.textContent="The details don't match this local demo.";
+  }
+}function toggleMenu(){
+  document.getElementById("sidebar").classList.toggle("open");
+}function showPage(id,btn){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".nav").forEach(b=>b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+
+  if(innerWidth<760){
+    document.getElementById("sidebar").classList.remove("open");
+  }
+}
+
+const first=[["ANA 221","R",2,20,41,61,"B"],["MLS 301","C",2,18,50,68,"B"],["MLS 311","C",2,9,40,49,"F"],["MLS 309","C",2,13,30,41,"F"],["BCM 211","R",2,15,35,50,"C"],["PHA 301","C",2,11,30,41,"F"],["BCM 231","R",2,23,55,78,"A"],["MLS 303","C",2,13,28,41,"F"],["MLS 305","C",2,20,40,60,"B"],["MLS 307","C",2,"NR","NR","NR","NR"]];
+
+const second=[["PHY 102","R",3,"NR","NR","NR","NR"],["CHM 122","R",3,"NR","NR","NR","NR"],["PHS 262","D",2,"NR","NR","NR","NR"],["PHS 272","D",2,"NR","NR","NR","NR"],["MLS 302","C",2,"NR","NR","NR","NR"],["MLS 306","C",2,"NR","NR","NR","NR"],["MLS 304","C",2,"NR","NR","NR","NR"],["MLS 308","C",2,"NR","NR","NR","NR"],["MLS 310","C",2,"NR","NR","NR","NR"],["BCH 304","C",2,"NR","NR","NR","NR"],["ENT 312","C",2,"NR","NR","NR","NR"]];
+
+const first100=[
+["GSS 101","C",2,12,44,56,"C"],
+["GSS 131","C",2,23,28,51,"C"],
+["BIO 111","C",3,25,16,41,"E"],
+["MLS 111","C",3,14,27,41,"E"],
+["MTH 111","C",3,22,24,46,"D"],
+["PHY 101","C",3,0,30,30,"F"],
+["CHM 101","C",3,17,24,41,"E"]
+];
+
+const second100=[
+["PHY 102","R",3,0,32,32,"F"],
+["GST 102","C",2,18,42,60,"B"],
+["GSS 122","C",2,12,56,68,"B"],
+["CHM 122","C",3,0,24,24,"F"],
+["GSS 102","C",2,16,37,53,"C"],
+["GSS 112","C",2,28,48,76,"A"],
+["BIO 112","C",2,27,23,50,"C"]
+];
+
+const first200=[
+["PHY 101","R",2,22,48,70,"A"],
+["ANA 211","C",2,24,40,64,"B"],
+["ANA 221","C",2,3,20,23,"F"],
+["ANA 231","C",2,20,41,61,"B"],
+["BCM 221","C",2,22,50,72,"A"],
+["BCM 211","C",2,0,24,24,"F"],
+["BCM 231","C",2,21,15,36,"F"],
+["PHS 211","C",2,16,50,66,"B"],
+["PHS 221","C",3,0,60,60,"B"],
+["GSS 211","C",2,27,38.5,65.5,"A"]
+];
+
+const second200=[
+["PHY 102","R",3,0,0,"","F"],
+["CHM 122","R",3,0,0,"","F"],
+["ANA 222","C",3,11,51,62,"C"],
+["BCM 262","C",3,21,41,62,"E"],
+["BCM 252","C",3,11,40,51,"E"],
+["MMP 212","C",2,18,62,80,"B"],
+["MMP 232","C",1,22,66,88,"B"],
+["MLS 212","C",2,12,40,52,"E"],
+["GSS 212","C",2,26,52,78,"C"],
+["GST 202","C",2,26,70,96,"A"]
+];
+
+function showResults(){
+  const session=document.getElementById("session").value;
+  const level=document.getElementById("level").value;
+  const season=document.getElementById("season").value;
+
+  if(!session || !level || !season){
+    alert("Please select your session, level, and season.");
+    return;
+  }
+
+  let firstData,secondData,cgp,cgpa,remarks;
+
+  if(session==="2022/2023" && level==="100 Level"){
+    firstData=first100;
+    secondData=second100;
+    cgp="1.89";
+    cgpa="1.89";
+    remarks="RPT PHY101, CHM122, PHY102";
+  }
+  else if(session==="2023/2024" && level==="200 Level"){
+    firstData=first200;
+    secondData=second200;
+    cgp="2.48";
+    cgpa="2.22";
+    remarks="TAKE PHS262, PHS272, RPT CHM122, PHY102, BCM211, BCM231, ANA221";
+  }
+  else if(session==="2025/2026" && level==="300 Level"){
+    firstData=first;
+    secondData=second;
+    cgp="1.60";
+    cgpa="2.80";
+    remarks="TAKE MLS 311, MLS 303, MLS 309, PHA 301";
+  }
+  else{
+    alert("No result found for the selected session and level.");
+    return;
+  }
+
+  function makeTable(data,title){
+    return `
+      <div class="result-semester">
+        <div class="semester-label">${title}</div>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>COURSE</th>
+                <th>TYPE</th>
+                <th>UNIT</th>
+                <th>CA</th>
+                <th>EXAM</th>
+                <th>TOTAL</th>
+                <th>GRADE</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.map((r,i)=>`
+                <tr>
+                  <td>${r[0]}</td>
+                  <td>${r[1]}</td>
+                  <td>${r[2]}</td>
+                  <td>${r[3]}</td>
+                  <td>${r[4]}</td>
+                  <td>${r[5]}</td>
+                  <td><span class="grade ${r[6]}">${r[6]}</span></td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+
+  document.getElementById("resultTable").innerHTML=`
+    <div class="result-sheet">
+
+      <div class="result-strip">
+        <div class="result-brand">
+          <div class="result-seal">
+            <img src="unical-logo.jpg"
+                 alt="UNICAL Logo"
+                 style="width:42px;height:42px;object-fit:contain;">
+          </div>
+
+          <div>
+            <div class="result-university">UNIVERSITY OF CALABAR</div>
+            <div class="result-subtitle">UNICAL RESULT DATABASE</div>
+          </div>
+        </div>
+
+        <div class="result-meta">
+          <div>${session}</div>
+          <div>${season}</div>
+        </div>
+      </div>
+
+      <div class="result-namebar">
+
+  <div class="result-student-name">
+    BAYIM CONFIDENCE KEJIE
+  </div>
+
+  <div class="result-student-meta">
+    <span>${level}</span>
+    <span>22/021145071</span>
+  </div>
+
+  <div class="result-student-info">
+    <div><b>FACULTY:</b> ALLIED MEDICAL SCIENCES</div>
+    <div><b>DEPARTMENT:</b> MEDICAL LABORATORY SCIENCE</div>
+    <div><b>COURSE OF STUDY:</b> MEDICAL LABORATORY SCIENCE</div>
+    <div><b>SESSION:</b> ${session}</div>
+    <div><b>SEASON:</b> ${season}</div>
+  </div>
+
+</div>
+      <div class="result-semesters">
+        ${makeTable(firstData,"FIRST SEMESTER")}
+        ${makeTable(secondData,"SECOND SEMESTER")}
+      </div>
+
+      <div class="result-summary">
+
+        <div class="summary-box">
+          <div class="summary-label">CGP</div>
+          <div class="summary-value">${cgp}</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-label">CGPA</div>
+          <div class="summary-value">${cgpa}</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-label">ACADEMIC REMARKS</div>
+          <div class="summary-value">${remarks}</div>
+        </div>
+
+      </div>
+
+      <div class="grade-key">
+        <div class="grade-key-title">GRADE INTERPRETATION</div>
+
+        <div class="grade-key-grid">
+          <div><b>A</b> = 70–100</div>
+          <div><b>B</b> = 60–69</div>
+          <div><b>C</b> = 50–59</div>
+          <div><b>D</b> = 45–49</div>
+          <div><b>E</b> = 40–44</div>
+          <div><b>F</b> = 0–39</div>
+          <div><b>NR</b> = NOT RECORDED</div>
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  showPage("results");
+}
